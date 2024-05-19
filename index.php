@@ -46,7 +46,7 @@ class Scanner
 
     public static function DoScan()
     {
-        echo "Scanning " . self::$IP . "<br/>\n";
+        //echo "Scanning " . self::$IP . "<br/>\n";
           
         $url = str_replace("{IP}", self::$IP, self::$ScanRequestUrl);
         
@@ -196,36 +196,16 @@ else
 if ($act == "scanned")
 {
     $showHTMLHeader = false;
-    $url = Scanner::GetScannedDocUrl();       
-    
-/*    
-    ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>HP HTML Scanner</title>
-        <meta name="description" content="HP HTML Scanner">
-        <meta name="keywords" content="HP HTML Scanner">
-        <meta name="author" content="Petr Janoušek">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">        
-    </head>
-    <body>               
-        <iframe width="800" height="600" src="<?php echo $url ?>"></iframe>
-    </body>
-</html>           
-       
-    <?php   
- */    
-    
+    $url = Scanner::GetScannedDocUrl();
+
     header('Content-Type: application/pdf');      
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,0); 
-    curl_setopt($ch, CURLOPT_TIMEOUT,0);
+    //curl_setopt($ch, CURLOPT_HEADER, false);
+    ///curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,10); 
+    curl_setopt($ch, CURLOPT_TIMEOUT,10);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.1 Safari/537.11');
     $res = curl_exec($ch);
     
